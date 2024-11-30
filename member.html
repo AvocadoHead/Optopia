@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optopia - חבר קולקטיב</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav style="display: flex; justify-content: flex-end;">
+                <div class="nav-links">
+                    <a href="index.html" data-lang="he">דף הבית</a>
+                    <a href="index.html" data-lang="en">Home</a>
+                    <a href="gallery.html" data-lang="he">גלריה</a>
+                    <a href="gallery.html" data-lang="en">Gallery</a>
+                    <a href="courses.html" data-lang="he">קורסים</a>
+                    <a href="courses.html" data-lang="en">Courses</a>
+                </div>
+                <div class="language-toggle">
+                    <button onclick="toggleLanguage()">EN</button>
+                </div>
+            </nav>
+        </header>
+
+        <main>
+            <div class="member-profile">
+                <div class="member-header">
+                    <img id="member-image" class="member-profile-image" alt="Member Photo">
+                    <div class="member-info">
+                        <h1 id="member-name"></h1>
+                        <p id="member-role" class="member-role"></p>
+                    </div>
+                </div>
+                <div class="member-bio">
+                    <p id="member-bio"></p>
+                </div>
+                <div class="member-gallery">
+                    <h2 data-lang="he">גלריית האמן</h2>
+                    <h2 data-lang="en" style="display:none;">Artist Gallery</h2>
+                    <div id="member-gallery" class="grid-gallery"></div>
+                </div>
+                <div class="member-courses">
+                    <h2 data-lang="he">קורסים</h2>
+                    <h2 data-lang="en" style="display:none;">Courses</h2>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/members.js"></script>
+    <script src="js/gallery-data.js"></script>
+    <script src="js/courses-data.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Ensure all required scripts are loaded before rendering
+            if (window.Utils && window.MEMBERS && window.COURSES) {
+                initMemberPage();
+            } else {
+                console.error('Required scripts or data not loaded');
+            }
+        });
+    </script>
+</body>
+</html>

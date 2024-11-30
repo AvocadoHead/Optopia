@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optopia - פריט גלריה</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/global.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-top">
+                <div class="nav-buttons">
+                    <a href="index.html" class="nav-btn" data-lang="he">דף הבית</a>
+                    <a href="index.html" class="nav-btn" data-lang="en">Home</a>
+                    <a href="gallery.html" class="nav-btn" data-lang="he">גלריה</a>
+                    <a href="gallery.html" class="nav-btn" data-lang="en">Gallery</a>
+                    <a href="courses.html" class="nav-btn" data-lang="he">קורסים</a>
+                    <a href="courses.html" class="nav-btn" data-lang="en">Courses</a>
+                    <button onclick="toggleLanguage()" class="nav-btn">EN</button>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="gallery-item-page">
+                <div class="gallery-item-container">
+                    <img id="gallery-item-image" alt="Gallery Item">
+                    <div class="gallery-item-info">
+                        <h1 id="gallery-item-title"></h1>
+                        <p id="gallery-item-artist" class="artist"></p>
+                        <p id="gallery-item-description" class="description"></p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/members.js"></script>
+    <script src="js/gallery-data.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

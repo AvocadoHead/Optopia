@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optopia - Courses</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-top">
+                <div class="nav-buttons">
+                    <a href="index.html" class="nav-btn" data-lang="he">בית</a>
+                    <a href="index.html" class="nav-btn" data-lang="en" style="display:none;">Home</a>
+                    <a href="gallery.html" class="nav-btn" data-lang="he">גלריה</a>
+                    <a href="gallery.html" class="nav-btn" data-lang="en" style="display:none;">Gallery</a>
+                    <button onclick="toggleLanguage()" class="nav-btn">EN</button>
+                </div>
+            </div>
+        </header>
+        
+        <main>
+            <section class="courses">
+                <h2>קורסים</h2>
+                <div id="courses-grid" class="grid"></div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/members.js"></script>
+    <script src="js/gallery-data.js"></script>
+    <script src="js/courses-data.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('Checking script dependencies', {
+                Utils: !!window.Utils,
+                UtilsMethods: Object.keys(window.Utils || {}),
+                Courses: window.COURSES?.length || 0,
+                Members: window.MEMBERS?.length || 0
+            });
+
+            // Verify createCourseCard method
+            if (window.Utils && window.Utils.createCourseCard) {
+                console.log('createCourseCard method:', window.Utils.createCourseCard.toString());
+            }
+
+            const coursesGrid = document.getElementById('courses-grid');
+            if (coursesGrid) {
+                try {
+                    renderCourses(coursesGrid);
+                } catch (error) {
+                    console.error('Error initializing courses page:', error);
+                }
+            } else {
+                console.error('Courses grid not found');
+            }
+        });
+    </script>
+</body>
+</html>

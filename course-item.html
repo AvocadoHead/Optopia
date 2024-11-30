@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optopia - קורס</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <div class="nav-links">
+                    <a href="index.html" data-lang="he">דף הבית</a>
+                    <a href="index.html" data-lang="en" style="display:none;">Home</a>
+                    <a href="gallery.html" data-lang="he">גלריה</a>
+                    <a href="gallery.html" data-lang="en" style="display:none;">Gallery</a>
+                    <a href="courses.html" data-lang="he">קורסים</a>
+                    <a href="courses.html" data-lang="en" style="display:none;">Courses</a>
+                </div>
+                <div class="language-toggle">
+                    <button onclick="toggleLanguage()">EN/עב</button>
+                </div>
+            </nav>
+        </header>
+
+        <main>
+            <div class="course-details">
+                <div id="course-header">
+                    <h1 id="course-title"></h1>
+                    <p id="course-description"></p>
+                </div>
+
+                <div id="course-subtopics">
+                    <h2 data-lang="he">נושאי הקורס</h2>
+                    <h2 data-lang="en" style="display:none;">Course Topics</h2>
+                    <ul id="subtopics-list"></ul>
+                </div>
+
+                <div id="course-teachers">
+                    <h2 data-lang="he">מרצים</h2>
+                    <h2 data-lang="en" style="display:none;">Teachers</h2>
+                    <div id="teachers-container"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/members.js"></script>
+    <script src="js/gallery-data.js"></script>
+    <script src="js/courses-data.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/course-item.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const courseId = urlParams.get('id');
+            const currentLanguage = localStorage.getItem('optopia-lang') || 'he';
+
+            const course = window.COURSES.find(c => c.id === courseId);
+            if (course) {
+                document.getElementById('course-title').textContent = Utils.getLangText(course.name, currentLanguage);
+                document.getElementById('course-description').textContent = Utils.getLangText(course.description, currentLanguage);
+
+                const subtopicsList = document.getElementById('subtopics-list');
+                course.subTopics[currentLanguage].forEach(topic => {
+                    const li = document.createElement('li');
+                    li.textContent = topic;
+                    subtopicsList.appendChild(li);
+                });
+
+                const teachersContainer = document.getElementById('teachers-container');
+                course.teachers.forEach(teacherId => {
+                    const member = window.MEMBERS.find(m => m.id === teacherId);
+                    if (member) {
+                        const teacherLink = document.createElement('a');
+                        teacherLink.href = `member.html?id=${teacherId}`;
+                        teacherLink.textContent = Utils.getLangText(member.name, currentLanguage);
+                        teacherLink.classList.add('teacher-link');
+                        teachersContainer.appendChild(teacherLink);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

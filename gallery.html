@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optopia - Gallery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-top">
+                <div class="nav-buttons">
+                    <a href="index.html" class="nav-btn" data-lang="he">בית</a>
+                    <a href="index.html" class="nav-btn" data-lang="en" style="display:none;">Home</a>
+                    <a href="courses.html" class="nav-btn" data-lang="he">קורסים</a>
+                    <a href="courses.html" class="nav-btn" data-lang="en" style="display:none;">Courses</a>
+                    <button onclick="toggleLanguage()" class="nav-btn">EN</button>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <section class="gallery">
+                <h2>גלריה</h2>
+                <div id="gallery-grid" class="grid-gallery"></div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/members.js"></script>
+    <script src="js/gallery-data.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
