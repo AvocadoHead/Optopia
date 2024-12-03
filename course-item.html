@@ -4,23 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Optopia - Course</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/components.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <nav>
-                <div class="nav-links">
-                    <a href="index.html" data-lang="he">דף הבית</a>
-                    <a href="index.html" data-lang="en" style="display:none;">Home</a>
-                    <a href="gallery.html" data-lang="he">גלריה</a>
-                    <a href="gallery.html" data-lang="en" style="display:none;">Gallery</a>
-                    <a href="courses.html" data-lang="he">קורסים</a>
-                    <a href="courses.html" data-lang="en" style="display:none;">Courses</a>
-                    <button onclick="toggleLanguage()" class="nav-btn" id="toggle-language">EN</button>
+            <div class="header-top">
+                <div class="nav-buttons">
+                    <a href="index.html" class="nav-btn" data-lang="he">דף הבית</a>
+                    <a href="index.html" class="nav-btn" data-lang="en">Home</a>
+                    <a href="gallery.html" class="nav-btn" data-lang="he">גלריה</a>
+                    <a href="gallery.html" class="nav-btn" data-lang="en">Gallery</a>
+                    <a href="courses.html" class="nav-btn" data-lang="he">קורסים</a>
+                    <a href="courses.html" class="nav-btn" data-lang="en">Courses</a>
+                    <button onclick="toggleLanguage()" class="nav-btn">EN</button>
                 </div>
-            </nav>
+            </div>
         </header>
 
         <main>
@@ -31,12 +32,14 @@
                 </div>
 
                 <div id="course-subtopics">
-                    <h2>נושאי הקורס</h2>
+                    <h2 data-lang="he">נושאי הקורס</h2>
+                    <h2 data-lang="en" style="display:none;">Course Topics</h2>
                     <ul id="subtopics-list"></ul>
                 </div>
 
                 <div id="course-teachers">
-                    <h2>מרצים</h2>
+                    <h2 data-lang="he">מרצים</h2>
+                    <h2 data-lang="en" style="display:none;">Teachers</h2>
                     <div id="teachers-container"></div>
                 </div>
             </div>
@@ -49,6 +52,46 @@
     <script src="js/courses-data.js"></script>
     <script src="js/main.js"></script>
     <script>
+        function renderCourseDetails(course, lang) {
+            document.getElementById('course-title').textContent = Utils.getLangText(course.name, lang);
+            document.getElementById('course-description').textContent = Utils.getLangText(course.description, lang);
+
+            const subtopicsList = document.getElementById('subtopics-list');
+            subtopicsList.innerHTML = ''; // Clear existing subtopics
+            course.subTopics[lang].forEach(topic => {
+                const li = document.createElement('li');
+                li.textContent = topic;
+                subtopicsList.appendChild(li);
+            });
+
+            const teachersContainer = document.getElementById('teachers-container');
+            teachersContainer.innerHTML = ''; // Clear existing teachers
+            course.teachers.forEach(teacherId => {
+                const member = window.MEMBERS.find(m => m.id === teacherId);
+                if (member) {
+                    const teacherLink = document.createElement('a');
+                    teacherLink.href = `member.html?id=${teacherId}`;
+                    teacherLink.classList.add('teacher-link');
+
+                    const teacherImage = document.createElement('img');
+                    teacherImage.src = member.image || '/assets/default-profile.jpg';
+                    teacherImage.alt = Utils.getLangText(member.name, lang);
+                    teacherImage.classList.add('teacher-image');
+                    teacherImage.onerror = (e) => {
+                        e.target.src = '/assets/default-profile.jpg';
+                    };
+
+                    const teacherName = document.createElement('span');
+                    teacherName.textContent = Utils.getLangText(member.name, lang);
+                    teacherName.classList.add('teacher-name');
+
+                    teacherLink.appendChild(teacherImage);
+                    teacherLink.appendChild(teacherName);
+                    teachersContainer.appendChild(teacherLink);
+                }
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
             const courseId = urlParams.get('id');
@@ -56,26 +99,38 @@
 
             const course = window.COURSES.find(c => c.id === courseId);
             if (course) {
-                document.getElementById('course-title').textContent = Utils.getLangText(course.name, currentLanguage);
-                document.getElementById('course-description').textContent = Utils.getLangText(course.description, currentLanguage);
+                renderCourseDetails(course, currentLanguage);
 
-                const subtopicsList = document.getElementById('subtopics-list');
-                course.subTopics[currentLanguage].forEach(topic => {
-                    const li = document.createElement('li');
-                    li.textContent = topic;
-                    subtopicsList.appendChild(li);
-                });
+                // Use the toggleLanguage function from main.js
+                window.toggleLanguage = function() {
+                    const currentLang = document.documentElement.lang;
+                    const newLang = currentLang === 'he' ? 'en' : 'he';
+                    
+                    document.documentElement.lang = newLang;
+                    document.documentElement.dir = newLang === 'he' ? 'rtl' : 'ltr';
+                    
+                    localStorage.setItem('optopia-lang', newLang);
+                    
+                    const toggleBtn = document.querySelector('.nav-btn:last-child');
+                    toggleBtn.textContent = newLang === 'he' ? 'EN' : 'עב';
+                    
+                    // Show/hide language-specific elements
+                    document.querySelectorAll('[data-lang]').forEach(el => {
+                        el.style.display = el.getAttribute('data-lang') === newLang ? 'block' : 'none';
+                    });
 
-                const teachersContainer = document.getElementById('teachers-container');
-                course.teachers.forEach(teacherId => {
-                    const member = window.MEMBERS.find(m => m.id === teacherId);
-                    if (member) {
-                        const teacherLink = document.createElement('a');
-                        teacherLink.href = `member.html?id=${teacherId}`;
-                        teacherLink.textContent = Utils.getLangText(member.name, currentLanguage);
-                        teacherLink.classList.add('teacher-link');
-                        teachersContainer.appendChild(teacherLink);
-                    }
+                    // Dispatch custom event for language toggle
+                    const event = new Event('languageToggled');
+                    document.dispatchEvent(event);
+
+                    // Re-render course details
+                    renderCourseDetails(course, newLang);
+                };
+
+                // Add language toggle event listener
+                document.addEventListener('languageToggled', function() {
+                    const newLang = document.documentElement.lang;
+                    renderCourseDetails(course, newLang);
                 });
             }
         });
