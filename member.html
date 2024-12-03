@@ -11,17 +11,15 @@
 <body>
     <div class="container">
         <header>
-            <nav style="display: flex; justify-content: flex-end;">
+            <nav>
                 <div class="nav-links">
                     <a href="index.html" data-lang="he">דף הבית</a>
-                    <a href="index.html" data-lang="en">Home</a>
+                    <a href="index.html" data-lang="en" style="display:none;">Home</a>
                     <a href="gallery.html" data-lang="he">גלריה</a>
-                    <a href="gallery.html" data-lang="en">Gallery</a>
+                    <a href="gallery.html" data-lang="en" style="display:none;">Gallery</a>
                     <a href="courses.html" data-lang="he">קורסים</a>
-                    <a href="courses.html" data-lang="en">Courses</a>
-                </div>
-                <div class="language-toggle">
-                    <button onclick="toggleLanguage()">EN</button>
+                    <a href="courses.html" data-lang="en" style="display:none;">Courses</a>
+                    <button onclick="toggleLanguage()" class="nav-btn" id="toggle-language">EN</button>
                 </div>
             </nav>
         </header>
@@ -31,12 +29,21 @@
                 <div class="member-header">
                     <img id="member-image" class="member-profile-image" alt="Member Photo">
                     <div class="member-info">
-                        <h1 id="member-name"></h1>
-                        <p id="member-role" class="member-role"></p>
+                        <h1 id="member-name">
+                            <span data-lang="he"></span>
+                            <span data-lang="en" style="display:none;"></span>
+                        </h1>
+                        <p id="member-role" class="member-role">
+                            <span data-lang="he"></span>
+                            <span data-lang="en" style="display:none;"></span>
+                        </p>
                     </div>
                 </div>
                 <div class="member-bio">
-                    <p id="member-bio"></p>
+                    <p id="member-bio">
+                        <span data-lang="he"></span>
+                        <span data-lang="en" style="display:none;"></span>
+                    </p>
                 </div>
                 <div class="member-gallery">
                     <h2 data-lang="he">גלריית האמן</h2>
@@ -46,6 +53,7 @@
                 <div class="member-courses">
                     <h2 data-lang="he">קורסים</h2>
                     <h2 data-lang="en" style="display:none;">Courses</h2>
+                    <div id="member-courses-grid" class="grid"></div>
                 </div>
             </div>
         </main>
@@ -63,7 +71,11 @@
             if (window.Utils && window.MEMBERS && window.COURSES) {
                 initMemberPage();
             } else {
-                console.error('Required scripts or data not loaded');
+                console.error('Required scripts or data not loaded', {
+                    Utils: !!window.Utils,
+                    MEMBERS: window.MEMBERS?.length || 0,
+                    COURSES: window.COURSES?.length || 0
+                });
             }
         });
     </script>
