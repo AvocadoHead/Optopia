@@ -14,7 +14,7 @@ const MEMBERS = [
             he: 'תיאור מלא יבוא בהמשך',
             en: 'Full description to be added'
         },
-        image: 'assets/yuval-avidani.jpeg',
+        image: 'assets/yuval-avidani.jpg',
         skills: [],
         socialLinks: {},
         gallery: [],
