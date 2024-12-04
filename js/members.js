@@ -14,7 +14,7 @@ const MEMBERS = [
             he: 'תיאור מלא יבוא בהמשך',
             en: 'Full description to be added'
         },
-        image: 'https://scontent.ftlv26-1.fna.fbcdn.net/v/t39.30808-6/464742977_7912398108860679_4653634659662591409_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=IbZm4XOH_6oQ7kNvgFo97RX&_nc_zt=23&_nc_ht=scontent.ftlv26-1.fna&_nc_gid=AqVvCwWxp9AZpKy1mxrYQCD&oh=00_AYA5WJTQ_S26gFQHknQgnHOKLBmLVUWpfJ7Z5JSnv5TYEg&oe=674D24EE',
+        image: 'assets/yuval-avidani.jpeg',
         skills: [],
         socialLinks: {},
         gallery: [],
