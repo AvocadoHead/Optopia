@@ -714,6 +714,27 @@ const MEMBERS = [
         category: 'ai-experts'
     },
     {
+        id: 'ronen-herzog',
+        name: { 
+            he: 'רונן הרצוג', 
+            en: 'Ronen Herzog' 
+        },
+        role: { 
+            he: 'יוצר דיגיטלי, צלם, עורך יוצר תוכן ai', 
+            en: 'AI Creator, Content Creator, and Instructor' 
+        },
+        bio: {
+            he: 'תיאור מלא יבוא בהמשך',
+            en: 'Full description to be added'
+        },
+        image: 'assets/ronen-herzog.jpg',
+        skills: [],
+        socialLinks: {},
+        gallery: [],
+        courses: [],
+        category: 'ai-experts'
+    },
+    {
         id: 'ron-zikno',
         name: { 
             he: 'רון זיקנו', 
