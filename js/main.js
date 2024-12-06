@@ -373,6 +373,7 @@ function initGalleryItemPage() {
     const item = window.DATA.gallery.find(g => g.id === itemId);
     
     if (!item) {
+        console.error('No gallery item found for ID:', itemId);
         window.location.href = 'gallery.html';
         return;
     }
@@ -381,8 +382,24 @@ function initGalleryItemPage() {
     const artist = window.MEMBERS.find(m => m.id === item.artist);
     
     const galleryItemImage = document.getElementById('gallery-item-image');
-    galleryItemImage.src = item.src;
-    galleryItemImage.onerror = handleImageError;
+    if (!galleryItemImage) {
+        console.error('Gallery item image element not found');
+        return;
+    }
+    
+    console.log('Original thumbnail URL:', item.src);
+    
+    // Direct conversion of thumbnail to full-res image
+    const highResImageSrc = item.src.replace('thumbnail?id=', 'uc?export=view&id=');
+    
+    // Set image source directly
+    galleryItemImage.src = highResImageSrc;
+    
+    // Add error handling
+    galleryItemImage.onerror = function() {
+        console.warn('Failed to load high-res image, falling back to original');
+        galleryItemImage.src = item.src;
+    };
     
     document.getElementById('gallery-item-title').textContent = Utils.getLangText(item.title, lang);
     
@@ -420,6 +437,21 @@ function initGalleryItemPage() {
     }
     
     document.getElementById('gallery-item-description').textContent = Utils.getLangText(item.description, lang);
+}
+
+function getGoogleDriveFileId(url) {
+    // Extract file ID from various Google Drive URL formats
+    const thumbnailMatch = url.match(/thumbnail\?id=([^&]+)/);
+    const previewMatch = url.match(/\/d\/([^/]+)\//);
+    
+    return (thumbnailMatch && thumbnailMatch[1]) || 
+           (previewMatch && previewMatch[1]) || 
+           null;
+}
+
+function getHighResGoogleDriveImage(thumbnailUrl) {
+    // Direct conversion of thumbnail to full-res image
+    return thumbnailUrl.replace('thumbnail?id=', 'uc?export=view&id=');
 }
 
 function renderGalleryPreview(container, count = 10) {
