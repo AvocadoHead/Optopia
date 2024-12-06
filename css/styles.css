@@ -1,110 +1,49 @@
-/* Reset and base styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    color: #333;
-}
-
-/* Header and Navigation */
-header {
-    background-color: #2c3e50;
-    padding: 1rem;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-nav {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo {
-    color: white;
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-
-.nav-links {
-    display: flex;
-    list-style: none;
-}
-
-.nav-links li {
-    margin-left: 2rem;
-}
-
-.nav-links a {
-    color: white;
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-.nav-links a:hover {
-    color: #3498db;
-}
-
-/* Main content */
+/* Main content styles */
 main {
-    max-width: 1200px;
+    max-width: var(--max-width);
     margin: 0 auto;
-    padding: 2rem;
+    padding: var(--spacing-lg);
 }
 
 .hero {
     text-align: center;
-    padding: 4rem 0;
+    padding: calc(var(--spacing-lg) * 2) 0;
 }
 
 .hero h1 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    color: #2c3e50;
+    font-size: var(--font-size-xxl);
+    margin-bottom: var(--spacing-md);
+    color: var(--primary-dark);
 }
 
 .hero p {
-    font-size: 1.2rem;
-    color: #666;
+    font-size: var(--font-size-lg);
+    color: var(--text-secondary);
 }
 
 /* Footer */
 footer {
-    background-color: #2c3e50;
-    color: white;
+    background-color: var(--primary-dark);
+    color: var(--primary-white);
     text-align: center;
-    padding: 1rem;
+    padding: var(--spacing-md);
     position: fixed;
     bottom: 0;
     width: 100%;
+    z-index: 100;
 }
 
 /* Responsive design */
 @media (max-width: 768px) {
-    nav {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .nav-links {
-        margin-top: 1rem;
-    }
-
-    .nav-links li {
-        margin: 0 1rem;
+    main {
+        padding: var(--spacing-md);
     }
 
     .hero {
-        padding: 2rem 0;
+        padding: var(--spacing-lg) 0;
     }
 
     .hero h1 {
-        font-size: 2rem;
+        font-size: var(--font-size-xl);
     }
 }

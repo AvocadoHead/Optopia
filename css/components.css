@@ -15,8 +15,7 @@
     align-items: center;
     text-align: center;
     background: var(--background-light);
-    border-radius: var(--border-radius);
-    padding: calc(var(--spacing-unit) / 2);
+    padding: var(--spacing-md);
     transition: transform var(--transition-speed);
     cursor: pointer;
     text-decoration: none;
@@ -25,7 +24,6 @@
 
 .member-card:hover {
     transform: scale(1.05);
-    box-shadow: var(--shadow-hover);
 }
 
 .member-card .member-image {
@@ -66,22 +64,21 @@
 .member-gallery-section .grid-gallery {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: var(--spacing-md);
     justify-content: flex-start;
     width: 100%;
 }
 
 .member-gallery-section .gallery-card {
-    flex: 0 1 calc((100% - 40px) / 3);
+    flex: 0 1 calc((100% - var(--spacing-md) * 2) / 3);
     position: relative;
     cursor: pointer;
     break-inside: avoid;
-    margin-bottom: 10px;
     overflow: hidden;
-    border-radius: 8px;
+    border-radius: var(--border-radius);
     text-decoration: none;
     color: inherit;
-    transition: transform 0.3s ease;
+    transition: transform var(--transition-speed);
 }
 
 .member-gallery-section .gallery-card:hover {
@@ -92,7 +89,7 @@
 .member-gallery-section .gallery-image {
     position: relative;
     width: 100%;
-    padding-top: 100%; /* Maintain square aspect ratio */
+    padding-top: 100%;
     overflow: hidden;
 }
 
@@ -103,8 +100,8 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 8px;
-    transition: transform 0.3s ease;
+    border-radius: var(--border-radius);
+    transition: transform var(--transition-speed);
 }
 
 .member-gallery-section .gallery-card:hover .gallery-image img {
@@ -117,9 +114,9 @@
     left: 0;
     right: 0;
     background: rgba(0, 0, 0, 0.7);
-    color: white;
-    padding: 10px;
-    transition: bottom 0.3s ease;
+    color: var(--primary-white);
+    padding: var(--spacing-sm);
+    transition: bottom var(--transition-speed);
 }
 
 .member-gallery-section .gallery-card:hover .gallery-info {
@@ -127,88 +124,87 @@
 }
 
 .member-gallery-section .gallery-info h3 {
-    margin: 0 0 5px 0;
-    font-size: 1.1em;
+    margin: 0 0 var(--spacing-xs) 0;
+    font-size: var(--font-size-base);
 }
 
 .member-gallery-section .gallery-info .artist {
-    margin: 5px 0;
-    font-size: 0.9em;
+    margin: var(--spacing-xs) 0;
+    font-size: var(--font-size-sm);
     opacity: 0.9;
 }
 
 .member-gallery-section .gallery-info .description {
-    font-size: 0.9em;
-    margin: 5px 0 0 0;
+    font-size: var(--font-size-sm);
+    margin: var(--spacing-xs) 0 0 0;
     opacity: 0.8;
-}
-
-@media (max-width: 1024px) {
-    .member-gallery-section .gallery-card {
-        flex: 0 1 calc((100% - 20px) / 2);
-    }
-}
-
-@media (max-width: 768px) {
-    .member-gallery-section .gallery-card {
-        flex: 0 1 100%;
-    }
 }
 
 /* Gallery Item Page */
 .gallery-item-page {
-    padding: 2rem;
-    height: auto;  /* Explicitly set height to auto */
+    padding: var(--spacing-lg);
+    height: auto;
+    max-width: var(--max-width);
+    margin: 0 auto;
 }
 
 .gallery-item-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem;
-    height: auto;  /* Explicitly set height to auto */
+    width: 100%;
+    padding: var(--spacing-md);
 }
 
 #gallery-item-image {
     max-width: 100%;
-    width: 100%;
-    height: 350px;
+    width: auto;
+    max-height: 90vh;
+    min-height: 500px;
+    height: auto;
     object-fit: contain;
-    margin-bottom: 2rem;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    border-radius: 10px;
+    margin-bottom: var(--spacing-lg);
+    box-shadow: var(--shadow-lg);
+    border-radius: var(--border-radius);
+    background-color: var(--background-light);
+}
+
+@media (max-width: 1024px) {
+    #gallery-item-image {
+        max-height: 80vh;
+        min-height: 400px;
+    }
+}
+
+@media (max-width: 768px) {
+    #gallery-item-image {
+        max-height: 70vh;
+        min-height: 300px;
+    }
+}
+
+.gallery-item-info {
+    width: 100%;
+    max-width: 800px;
 }
 
 .gallery-item-info h1 {
-    margin-bottom: 0.5rem;
-}
-
-.artist-link {
-    color: var(--text-color);
-    text-decoration: none;
-    font-size: 1.2em;
-    transition: color 0.3s ease;
-    display: inline-block;
-    margin: 10px 0;
-}
-
-.artist-link:hover {
-    color: var(--accent-color);
-    text-decoration: underline;
-}
-
-.gallery-item-info .description {
-    margin-top: 1rem;
-    line-height: 1.6;
-    font-size: 1.1em;
+    font-size: var(--font-size-xl);
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-sm);
 }
 
 .gallery-item-info .artist {
-    font-size: 1.2em;
-    color: #666;
-    margin: 10px 0;
+    font-size: var(--font-size-lg);
+    color: var(--text-secondary);
+    margin: var(--spacing-sm) 0;
+}
+
+.gallery-item-info .description {
+    font-size: var(--font-size-base);
+    color: var(--text-primary);
+    line-height: 1.6;
+    margin-top: var(--spacing-md);
 }
 
 /* Courses Section Styling */
